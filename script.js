@@ -1,4 +1,5 @@
-const imageClass = ["img1","img2","img3","img4","img5"];
+const imageClasses = ["img1", "img2", "img3", "img4", "img5"];
+
 const tilesContainer = document.getElementById("tiles");
 const resetBtn = document.getElementById("reset");
 const verifyBtn = document.getElementById("verify");
@@ -6,32 +7,31 @@ const message = document.getElementById("para");
 
 let selectedImages = [];
 
-function shuffle(arr){
-	for(let i = arr.length - 1; i > 0; i--){
-			const j = Math.floor(Math.random() * (i + 1));
-		    [arr[i],arr[j]] = [arr[j],arr[i]];
-	}
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
 }
 
-function loadImages(){
-	tilesContainer.innerHTML = "";
-	message.innerText = "";
-	verifyBtn.style.display = "none";
-	resetBtn.style.display = "none";
-	selectedImages = [];
+function loadImages() {
+  tilesContainer.innerHTML = "";
+  message.innerText = "";
+  verifyBtn.style.display = "none";
+  resetBtn.style.display = "none";
+  selectedImages = [];
 
-	const duplicateIndex = Math.floor(Math.random() * imageClasses.length);
-	const images = [...imageClasses, imageclasses[duplicateIndex]];
-	shuffle(images);
+  const duplicateIndex = Math.floor(Math.random() * imageClasses.length);
+  const images = [...imageClasses, imageClasses[duplicateIndex]];
+  shuffle(images);
 
-	images.forEach((cls) => {
+  images.forEach((cls) => {
     const img = document.createElement("img");
     img.classList.add(cls);
     img.dataset.cls = cls;
     img.addEventListener("click", () => handleImageClick(img));
     tilesContainer.appendChild(img);
   });
-	
 }
 
 function handleImageClick(img) {
@@ -46,12 +46,10 @@ function handleImageClick(img) {
   }
 }
 
-// Handle reset
 resetBtn.addEventListener("click", () => {
   loadImages();
 });
 
-// Handle verification
 verifyBtn.addEventListener("click", () => {
   verifyBtn.style.display = "none";
 
